@@ -27,8 +27,8 @@ public class CursomcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Categoria cat1 = new Categoria(null,"ARMARINHO");
-		Categoria cat2 = new Categoria(null,"CAMA E MESA");
+		Categoria cat1 = new Categoria(null,"ESCRITORIO");
+		Categoria cat2 = new Categoria(null,"INFORMATICA");
 		
 		Produto p1 = new Produto(null,"COMPUTADOR",2000.00);
 		Produto p2 = new Produto(null,"IMPRESSORA",900.00);

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import br.com.srconsultoria.cursomc.domain.Categoria;
 import br.com.srconsultoria.cursomc.repositories.CategoriaRepository;
+import br.com.srconsultoria.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -17,7 +18,11 @@ public class CategoriaService {
 	public Categoria buscar(Integer id) {
 		
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		
+		// Utilizando uma função Lambda do Java 8
+		// Para retornar o objeto ou a exceção para ser tratada por um Handler
+		
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		}
-
 }
