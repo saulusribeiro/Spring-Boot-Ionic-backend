@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable{
 
@@ -12,6 +14,7 @@ public class ItemPedido implements Serializable{
 	
 	// Id embutido em uma classe auxiliar
 	
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -33,10 +36,14 @@ public class ItemPedido implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-   //
+   // Tudo q começa com get, o Json entende q tem q serializar, dando referencia cíclica
+  // em associações muitos para um, ou muitos para muitos
+	
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
 	}
