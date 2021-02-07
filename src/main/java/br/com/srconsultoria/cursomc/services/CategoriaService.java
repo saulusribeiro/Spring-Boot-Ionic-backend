@@ -15,7 +15,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		
 		Optional<Categoria> obj = repo.findById(id);
 		
@@ -30,5 +30,12 @@ public class CategoriaService {
 		// O obj.setId(null) vai garantir que a operação será de inserção e não de update
 		obj.setId(null);
 		return repo.save(obj);
+	}
+	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
+		// o mesmo metodo save usado no insert, quando o id é diferente de nulo ele atualiza o objeto
+		return repo.save(obj);
+		
 	}
 }
