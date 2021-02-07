@@ -1,12 +1,14 @@
 package br.com.srconsultoria.cursomc.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 
 import br.com.srconsultoria.cursomc.domain.Categoria;
 import br.com.srconsultoria.cursomc.repositories.CategoriaRepository;
+import br.com.srconsultoria.cursomc.services.exceptions.DataIntegrityException;
 import br.com.srconsultoria.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -38,4 +40,23 @@ public class CategoriaService {
 		return repo.save(obj);
 		
 	}
+	
+	public void delete(Integer id) {
+	     find(id);
+	     
+	     // se o id não existir o find dispara uma exceção antes
+	     
+	     try {
+	    	 repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos associados");
+		}
+	     	 
+		
+	    
+			
+}
+		
+		
+		
 }

@@ -28,9 +28,6 @@ public class CategoriaResource {
 	}
 		
 	@RequestMapping(method = RequestMethod.POST)
-	
-	// o @RequestBody converte o objeto JSON para Categoria
-	
 	public ResponseEntity<Void> insert(@RequestBody Categoria obj){
 		
 		obj = service.insert(obj);
@@ -54,6 +51,13 @@ public class CategoriaResource {
 		
 		return ResponseEntity.noContent().build();
 		
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delte(@PathVariable Integer id) {
+		
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 		
 		
