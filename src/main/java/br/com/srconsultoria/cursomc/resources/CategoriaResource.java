@@ -4,9 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import br.com.srconsultoria.cursomc.services.CategoriaService;
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
+	
 	@Autowired
 	private CategoriaService service;
 	
@@ -33,8 +36,11 @@ public class CategoriaResource {
 	}
 		
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj){
+	public ResponseEntity<Void> insert( @Validated @RequestBody CategoriaDTO objDTO){
 		
+		// converte um DTO em um objeto Categoria
+		Categoria obj = service.fromDTO(objDTO);
+
 		obj = service.insert(obj);
 		
 		// Retorna a URI com o registro inserido no banco com o Id
@@ -47,8 +53,9 @@ public class CategoriaResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	
-	public<Void> ResponseEntity update(@PathVariable Integer id,@RequestBody Categoria obj) {
+	public<Void> ResponseEntity update( @PathVariable Integer id, @Validated @RequestBody CategoriaDTO objDTO) {
 		
+		Categoria obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		
