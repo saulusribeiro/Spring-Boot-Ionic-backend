@@ -40,11 +40,15 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
+		Categoria newObj = find(obj.getId());
+		
+		// atualize os dados de newObj com base no argumento obj
+		updateData(newObj, obj);
 		// o mesmo metodo save usado no insert, quando o id é diferente de nulo ele atualiza o objeto
 		return repo.save(obj);
 		
 	}
+	
 	
 	public void delete(Integer id) {
 	     find(id);
@@ -78,5 +82,10 @@ public class CategoriaService {
 	   return new Categoria(objDTO.getId(),objDTO.getNome());
    }
 		
+   private void updateData(Categoria newObj, Categoria obj) {
+	   
+	   newObj.setNome(obj.getNome());
+	  
+   }
 		
 }
