@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,7 +63,7 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delte(@PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		
 		service.delete(id);
 		return ResponseEntity.noContent().build();
@@ -76,7 +77,7 @@ public class ClienteResource {
 		
 		// Msssete : Percorrer a lista utilizando o recurso do JAVA 8 Stream, e converte uma lista para outra lista
 		
-		List<ClienteDTO> listaDTO = lista.stream().map(obj -> new  ClienteDTO(obj)).collect(Collectors.toList());
+		List<ClienteDTO> listaDTO =  lista.stream().map(obj -> new  ClienteDTO(obj)).collect(Collectors.toList());
 				
 		return ResponseEntity.ok().body(listaDTO);
 	}

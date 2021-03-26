@@ -17,6 +17,7 @@ import br.com.srconsultoria.cursomc.domain.Endereco;
 import br.com.srconsultoria.cursomc.domain.enums.TipoCliente;
 import br.com.srconsultoria.cursomc.dto.ClienteDTO;
 import br.com.srconsultoria.cursomc.dto.ClienteNewDTO;
+import br.com.srconsultoria.cursomc.repositories.CidadeRepository;
 import br.com.srconsultoria.cursomc.repositories.ClienteRepository;
 import br.com.srconsultoria.cursomc.repositories.EnderecoRepository;
 import br.com.srconsultoria.cursomc.services.exceptions.DataIntegrityException;
@@ -29,6 +30,7 @@ public class ClienteService {
 	private ClienteRepository repo;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	private CidadeRepository   cidadeRepo;
 
 	public Cliente find(Integer id) {
 
@@ -113,10 +115,12 @@ public class ClienteService {
 				objDTO.getBairro(), objDTO.getCep(), cli, cid);
 		cli.getEnderecos().add(end);
 		cli.getTelefones().add(objDTO.getTelefone1());
-		if (objDTO.getTelefone2() != null)
+		if (objDTO.getTelefone2() != null) {
 			cli.getTelefones().add(objDTO.getTelefone2());
-		if (objDTO.getTelefone3() != null)
-			cli.getTelefones().add(objDTO.getTelefone3());
+			}
+		if (objDTO.getTelefone3() != null) {
+			cli.getTelefones().add(objDTO.getTelefone3()); 
+			}
 
 		return cli;
 
