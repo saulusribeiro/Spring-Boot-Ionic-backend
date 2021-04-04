@@ -51,8 +51,18 @@ public class ItemPedido implements Serializable{
 		return id.getPedido();
 	}
 	
+// Para viabilizar a inserção de Pedidos, é necessário criar o método setPedido e setProduto
+	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
+	}
+	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
 	}
 	
 	public ItemPedidoPK getId() {
