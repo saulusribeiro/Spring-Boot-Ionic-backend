@@ -36,6 +36,13 @@ public class ItemPedido implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
+	public double getSubTotal() {
+		
+	  return (preco - desconto) * quantidade;	
+		
+		
+	}
    // Tudo q começa com get, o Json entende q tem q serializar, dando referencia cíclica
   // em associações muitos para um, ou muitos para muitos
 	
